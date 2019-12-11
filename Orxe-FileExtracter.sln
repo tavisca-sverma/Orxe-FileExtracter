@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orxe-FileExtracter", "Orxe-FileExtracter\Orxe-FileExtracter.csproj", "{E905B15C-E7B3-4E0B-9D16-A29D49829136}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orxe-FileExtracter.Tests", "Orxe-FileExtracter.Tests\Orxe-FileExtracter.Tests.csproj", "{2B384784-0AB0-459E-9559-4865C3C01A04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E905B15C-E7B3-4E0B-9D16-A29D49829136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E905B15C-E7B3-4E0B-9D16-A29D49829136}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E905B15C-E7B3-4E0B-9D16-A29D49829136}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E905B15C-E7B3-4E0B-9D16-A29D49829136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B384784-0AB0-459E-9559-4865C3C01A04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B384784-0AB0-459E-9559-4865C3C01A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B384784-0AB0-459E-9559-4865C3C01A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B384784-0AB0-459E-9559-4865C3C01A04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0F9AD1EE-19CD-4A2D-BEE8-F83A91F3C2E1}
+	EndGlobalSection
+EndGlobal
