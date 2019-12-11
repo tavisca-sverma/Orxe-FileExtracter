@@ -12,7 +12,7 @@ namespace Orxe_FileExtracter
         // RegionID | RegionName | RegionNameLong | Latitude | Longitude | SubClassification
             Place place = new Place();
             var items = line.Split('|')
-                .Select(s => s.Trim())
+                .Select(s => s.Trim().Replace("\"", ""))
                 .Concat("      ".Split(' '))
                 .ToList();
             place.RegionID = items[0];

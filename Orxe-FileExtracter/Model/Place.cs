@@ -21,6 +21,11 @@ namespace Orxe_FileExtracter
             Latitude = "";
             Longitude = "";
             SubClassification = "";
-    }
+        }
+
+        public string GetQueryString()
+        {
+            return $"\"{RegionID}\", \"{RegionName}\", \"{RegionNameLong}\", \"{Latitude}\", \"{Latitude}\", \"{SubClassification}\"";
+        }
     }
 }

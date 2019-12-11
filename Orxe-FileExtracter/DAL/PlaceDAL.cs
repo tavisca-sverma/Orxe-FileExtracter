@@ -14,43 +14,46 @@ namespace Orxe_FileExtracter.DAL
             _connectionString = iconfiguration.GetConnectionString("Default");
         }
 
-        public  void InsertPlace(Place place)
+   
+        public void InsertAllPlaces(List<Place> placesList)
         {
             try
             {
-                using (MySqlConnection con =  new MySqlConnection(_connectionString))
+                using (MySqlConnection con = new MySqlConnection(_connectionString))
                 {
-                    MySqlCommand command = new MySqlCommand();
-                    command.Connection = con;
-                    command.CommandText = "sp_InsertPlace";
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Connection?.Open();
-                    AddParamatersToCommand(command,place);
+                    var placesListQueryString = new StringBuilder();
+                    foreach (var place in placesList)
+                    {
+                        placesListQueryString.Append("(");
+                        placesListQueryString.Append(place.GetQueryString());
+                        placesListQueryString.Append(")");
+                        placesListQueryString.Append(",");
+                     
+                    }
+                    placesListQueryString.Remove(placesListQueryString.Length - 1, 1);
 
-                    command.ExecuteNonQueryAsync(); 
+                    MySqlCommand sizeCommand = new MySqlCommand();
+                    sizeCommand.Connection = con;
+                    sizeCommand.Connection?.Open();
+                    sizeCommand.CommandText = "SET GLOBAL max_allowed_packet=100*1024*1024;";
+                    sizeCommand.ExecuteNonQuery();
+                    sizeCommand.Connection.Close();
+
+                    string query = "Insert into places values"+placesListQueryString;
+                    MySqlCommand insertCommand = new MySqlCommand();
+                    insertCommand.Connection = con;
+                    insertCommand.Connection?.Open();
+                    insertCommand.CommandText = query;
+
+                    insertCommand.ExecuteNonQuery();
+                    insertCommand.Connection.Close();
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-   
-        }
 
-        private void AddParamatersToCommand(MySqlCommand command, Place place)
-        {
-            command.Parameters.Add(
-                  new MySqlParameter("@p_RegionID", place.RegionID));
-            command.Parameters.Add(
-               new MySqlParameter("@p_RegionName", place.RegionName));
-            command.Parameters.Add(
-               new MySqlParameter("@p_RegionNameLong", place.RegionNameLong));
-            command.Parameters.Add(
-               new MySqlParameter("@p_Latitude", place.Latitude));
-            command.Parameters.Add(
-               new MySqlParameter("@p_Longitude", place.Longitude));
-            command.Parameters.Add(
-               new MySqlParameter("@p_SubClassification", place.SubClassification));
         }
     }
 

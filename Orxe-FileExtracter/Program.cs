@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Orxe_FileExtracter.DAL;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
@@ -23,25 +24,25 @@ namespace Orxe_FileExtracter
                 StreamReader reader = File.OpenText("PointOfInterestCoordinatesList.txt");
                 PlaceDAL placeDAL = new PlaceDAL(_iconfiguration);
                 string line;
-                Place place;
+                List<Place> placeList= new List<Place>();
                 line = reader.ReadLine();
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
                 while ((line = reader.ReadLine()) != null)
                 {
-                    Console.SetCursorPosition(0, 4);
                     count++;
-                    place = FileExtractorTranslator.TranslateToPlace(line);
-                    placeDAL.InsertPlace(place);
-                    Console.Write(count);
-                    
-                            
+                    Place place = FileExtractorTranslator.TranslateToPlace(line);
+                    placeList.Add(place);       
                 }
+                
+                placeDAL.InsertAllPlaces(placeList);
+             
+                Console.WriteLine("Records added to database:"+count);
                 stopwatch.Stop();
-                Console.Write("Records added to database:"+count);
-                Console.WriteLine("Time taken:"+stopwatch.Elapsed);
-               
-            }else
+                Console.WriteLine("Time taken:" + stopwatch.Elapsed);
+
+            }
+            else
             {
                 Console.WriteLine("Invalid Input ");
             }
